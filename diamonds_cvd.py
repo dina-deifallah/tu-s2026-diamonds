@@ -90,12 +90,17 @@ avg_by_cut = (
 # declarative ordering: force the x-axis to follow bar height, overriding the
 # categorical's natural order (Fair < Good < ... < Ideal)
 cut_order = avg_by_cut["cut"].tolist()
+
+avg_by_cut["color_role"] = "other"
+avg_by_cut.loc[avg_by_cut["price"].idxmax(), "color_role"] = "highlight"
+
 fig_cut = px.bar(
     avg_by_cut, x="cut", y="price", title="Average Diamond Price by Cut",
     labels={"price": "Avg Price ($)", "cut": "Cut"},
     category_orders={"cut": cut_order},
-    color_discrete_sequence=[BLUE],
-)
+    color="color_role",
+    color_discrete_map={"highlight": ORANGE, "other": "#BFBFBF"},
+).update_layout(showlegend=False)
 
 # figure 3: Clarity Breakdown — treemap (replaces the donut)
 clarity_counts = filtered["clarity"].value_counts().reset_index()
