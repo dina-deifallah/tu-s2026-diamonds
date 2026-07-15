@@ -99,7 +99,7 @@ fig_cut = px.bar(
     labels={"price": "Avg Price ($)", "cut": "Cut"},
     category_orders={"cut": cut_order},
     color="color_role",
-    color_discrete_map={"highlight": ORANGE, "other": "#BFBFBF"},
+    color_discrete_map={"highlight": ORANGE, "other": BLUE},
 ).update_layout(showlegend=False)
 
 # figure 3: Clarity Breakdown — treemap (replaces the donut)
